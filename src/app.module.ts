@@ -1,10 +1,16 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { MovieModule } from './modules/movies.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    MovieModule,
+    TypeOrmModule.forRoot({
+      type: 'sqlite',
+      database: '../db.sql',
+      synchronize: true,
+      entities: ['dist/**/*.model.js'],
+    }),
+  ],
 })
 export class AppModule {}
