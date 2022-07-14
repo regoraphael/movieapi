@@ -9,11 +9,13 @@ import {
   ParseIntPipe,
   NotFoundException,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MoviesModel } from 'src/models/movies.model';
-import { MoviesSchema } from 'src/schema/movies.schema';
+import { MoviesSchema } from 'src/schemas/movies.schema';
 import { Repository } from 'typeorm';
 
+@ApiTags('movies')
 @Controller('/movies')
 export class MoviesController {
   constructor(
