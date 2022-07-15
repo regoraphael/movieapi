@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import * as path from 'path';
 import { MovieModule } from './modules/movies.module';
 
 @Module({
@@ -7,7 +8,7 @@ import { MovieModule } from './modules/movies.module';
     MovieModule,
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: '../db.sql',
+      database: path.resolve(__dirname, 'db.sql'),
       synchronize: true,
       entities: ['dist/**/*.model.js'],
     }),
