@@ -27,4 +27,4 @@
 ## Utilizando a aplicação
 ### Heroku
 1. Foi feito o deploy da aplicação no Heroku
-2. Documentação disponivel na URL: https://.herokuapp.com/api/
+2. Documentação disponivel na URL: https://raphaelrego-movieapi.herokuapp.com/api/
