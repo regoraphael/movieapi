@@ -9,7 +9,7 @@ import {
   ParseIntPipe,
   NotFoundException,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MoviesModel } from 'src/models/movies.model';
 import { MoviesSchema } from 'src/schemas/movies.schema';
@@ -23,6 +23,11 @@ export class MoviesController {
   ) {}
 
   @Post()
+  @ApiOperation({ summary: 'Create one movie' })
+  @ApiResponse({
+    status: 201,
+    type: MoviesSchema,
+  })
   public async create(
     @Body() body: MoviesSchema,
   ): Promise<{ data: MoviesModel }> {
@@ -32,6 +37,12 @@ export class MoviesController {
   }
 
   @Get()
+  @ApiOperation({ summary: 'List all movies' })
+  @ApiResponse({
+    status: 200,
+    type: MoviesSchema,
+    isArray: true,
+  })
   public async getAll(): Promise<{ data: MoviesModel[] }> {
     const list = await this.model.find();
 
@@ -39,6 +50,11 @@ export class MoviesController {
   }
 
   @Get(':id')
+  @ApiOperation({ summary: 'Get movie by id' })
+  @ApiResponse({
+    status: 200,
+    type: MoviesSchema,
+  })
   public async getById(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<{ data: MoviesModel }> {
@@ -50,6 +66,11 @@ export class MoviesController {
   }
 
   @Put(':id')
+  @ApiOperation({ summary: 'Update one movie' })
+  @ApiResponse({
+    status: 200,
+    type: MoviesSchema,
+  })
   public async update(
     @Param('id', ParseIntPipe) id: number,
     @Body() body: MoviesSchema,
@@ -64,6 +85,7 @@ export class MoviesController {
   }
 
   @Delete(':id')
+  @ApiOperation({ summary: 'Delete one movie' })
   public async delete(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<{ data: string }> {
